@@ -1,3 +1,10 @@
-1,ppppp,a,sss,2000,false
-3,null,null,null,1605,true
-0,a,a,a,22222,false
+1,1984,George Orwell,Ficção Distópica,1949,true
+2,O Senhor dos Anéis,J.R.R. Tolkien,Fantasia,1954,false
+3,Dom Quixote,Miguel de Cervantes,Ficção,1605,true
+4,O Pequeno Príncipe,Antoine de Saint-Exupéry,Infantil,1943,false
+5,Orgulho e Preconceito,Jane Austen,Romance,1813,true
+6,Harry Potter e a Pedra Filosofal,J.K. Rowling,Fantasia,1997,true
+7,A Metamorfose,Franz Kafka,Ficção,1915,true
+8,Moby Dick,Herman Melville,Aventura,1851,false
+9,Guerra e Paz,Leon Tolstói,Romance Histórico,1869,true
+10,A Revolução dos Bichos,George Orwell,Ficção Satírica,1945,false

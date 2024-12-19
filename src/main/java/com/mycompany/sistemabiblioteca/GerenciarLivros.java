@@ -18,9 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.table.DefaultTableModel;
 
-/**
- * Classe responsável pelo gerenciamento de livros no sistema.
- */
+
 public class GerenciarLivros extends javax.swing.JFrame {
     private List<Livro> livros = new ArrayList<>();
     private DefaultTableModel tableModel;
@@ -28,17 +26,11 @@ public class GerenciarLivros extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
 
-    /**
-     * Construtor da classe GerenciarLivros.
-     */
     public GerenciarLivros() {
-        System.out.println("Inicializou construtor");
+        this.setLocationRelativeTo(null);
         initComponents();
-        System.out.println("Inicializou componentes");
         carregarLivros();
-        System.out.println("Carregou livros");
         configurarTabela();
-        System.out.println("Configurou tabela");
     }
 
     private void carregarLivros() {
@@ -57,7 +49,7 @@ public class GerenciarLivros extends javax.swing.JFrame {
     }
 
     private void atualizarTabela() {
-        tableModel.setRowCount(0); // Limpar tabela
+        tableModel.setRowCount(0); 
         for (Livro livro : livros) {
             tableModel.addRow(new Object[] {
                 livro.getId(), livro.getTitulo(), livro.getAutor(),
@@ -68,7 +60,7 @@ public class GerenciarLivros extends javax.swing.JFrame {
 
     private void adicionarLivro() {
         AdicionarLivroDialog dialog = new AdicionarLivroDialog(this);
-        dialog.setVisible(true);  // Exibe o JDialog
+        dialog.setVisible(true);  
 
         Livro livroCriado = dialog.getNovoLivro();
         if (livroCriado != null) {
@@ -86,14 +78,16 @@ public class GerenciarLivros extends javax.swing.JFrame {
         }
 
         Livro livroSelecionado = livros.get(linhaSelecionada);
-        livroSelecionado.setTitulo(JOptionPane.showInputDialog("Novo Título:", livroSelecionado.getTitulo()));
-        livroSelecionado.setAutor(JOptionPane.showInputDialog("Novo Autor:", livroSelecionado.getAutor()));
-        livroSelecionado.setCategoria(JOptionPane.showInputDialog("Nova Categoria:", livroSelecionado.getCategoria()));
-        livroSelecionado.setAno(Integer.parseInt(JOptionPane.showInputDialog("Novo Ano:", livroSelecionado.getAno())));
+        EditarLivroDialog dialog = new EditarLivroDialog(this, livroSelecionado);
+        dialog.setVisible(true);
 
-        atualizarTabela();
-        salvarLivros();
+        Livro livroEditado = dialog.getLivroEditado();
+        if (livroEditado != null) {
+            atualizarTabela();
+            salvarLivros();
+        }
     }
+
 
     private void excluirLivro() {
         int linhaSelecionada = jTable1.getSelectedRow();
@@ -149,7 +143,6 @@ public class GerenciarLivros extends javax.swing.JFrame {
         btnExcluir.setText("Excluir Livro");
         btnExcluir.addActionListener(evt -> excluirLivro());
 
-        // Layout ajustado
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -206,7 +199,59 @@ public class GerenciarLivros extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
 
-    // Classe do modal de criação de livro
+    
+    public static class EditarLivroDialog extends JDialog {
+        private JTextField txtTitulo, txtAutor, txtCategoria, txtAno;
+        private JButton btnSalvar, btnCancelar;
+        private Livro livroEditado;
+
+        public EditarLivroDialog(JFrame parent, Livro livro) {
+            super(parent, "Editar Livro", true);
+            setLayout(new GridLayout(5, 2, 10, 10));
+            setSize(400, 300);
+            setLocationRelativeTo(parent);
+
+            add(new JLabel("Título:"));
+            txtTitulo = new JTextField(livro.getTitulo());
+            add(txtTitulo);
+
+            add(new JLabel("Autor:"));
+            txtAutor = new JTextField(livro.getAutor());
+            add(txtAutor);
+
+            add(new JLabel("Categoria:"));
+            txtCategoria = new JTextField(livro.getCategoria());
+            add(txtCategoria);
+
+            add(new JLabel("Ano:"));
+            txtAno = new JTextField(String.valueOf(livro.getAno()));
+            add(txtAno);
+
+            btnSalvar = new JButton("Salvar");
+            btnSalvar.addActionListener(e -> salvarAlteracoes(livro));
+            add(btnSalvar);
+
+            btnCancelar = new JButton("Cancelar");
+            btnCancelar.addActionListener(e -> dispose());
+            add(btnCancelar);
+        }
+
+        private void salvarAlteracoes(Livro livro) {
+            livro.setTitulo(txtTitulo.getText());
+            livro.setAutor(txtAutor.getText());
+            livro.setCategoria(txtCategoria.getText());
+            livro.setAno(Integer.parseInt(txtAno.getText()));
+
+            livroEditado = livro; 
+            dispose();  
+        }
+
+        public Livro getLivroEditado() {
+            return livroEditado;
+        }
+    }
+
+    
     public static class AdicionarLivroDialog extends JDialog {
         private JTextField txtTitulo, txtAutor, txtCategoria, txtAno;
         private JButton btnSalvar, btnCancelar;
@@ -218,7 +263,6 @@ public class GerenciarLivros extends javax.swing.JFrame {
             setSize(400, 300);
             setLocationRelativeTo(parent);
 
-            // Campos de texto
             add(new JLabel("Título:"));
             txtTitulo = new JTextField();
             add(txtTitulo);
@@ -235,7 +279,6 @@ public class GerenciarLivros extends javax.swing.JFrame {
             txtAno = new JTextField();
             add(txtAno);
 
-            // Botões
             btnSalvar = new JButton("Salvar");
             btnSalvar.addActionListener(e -> salvarLivro());
             add(btnSalvar);
@@ -245,15 +288,14 @@ public class GerenciarLivros extends javax.swing.JFrame {
             add(btnCancelar);
         }
 
-        // Método para salvar o livro
         private void salvarLivro() {
             String titulo = txtTitulo.getText();
             String autor = txtAutor.getText();
             String categoria = txtCategoria.getText();
             int ano = Integer.parseInt(txtAno.getText());
 
-            novoLivro = new Livro(0, titulo, autor, categoria, ano);  // Ajuste o ID conforme necessário
-            dispose();  // Fecha o modal após salvar
+            novoLivro = new Livro(0, titulo, autor, categoria, ano); 
+            dispose();  
         }
 
         public Livro getNovoLivro() {

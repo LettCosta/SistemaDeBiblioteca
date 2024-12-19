@@ -21,7 +21,34 @@ public class LivroCSV {
     + "/src/main/java/bancoDeDados/livros.csv";
     
     
+    public int contarTotalLivros() {
+        int total = 0;
+        try (BufferedReader br = new BufferedReader(new FileReader(CSV_FILE))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                total++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return total;
+    }
     
+    public int contarEmprestimos() {
+        int emprestimos = 0;
+        try (BufferedReader br = new BufferedReader(new FileReader(CSV_FILE))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                String[] campos = linha.split(",");
+                if (campos.length > 5 && campos[5].trim().equalsIgnoreCase("true")) {
+                    emprestimos++;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return emprestimos;
+    }
   
     public static List<Livro> lerLivrosDoCSV() throws IOException {
         List<Livro> livros = new ArrayList<>();

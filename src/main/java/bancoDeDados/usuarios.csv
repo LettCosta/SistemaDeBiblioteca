@@ -1,6 +1,11 @@
 nome,email,senha,tipoUsuario
-João Silva,joao.silva@dominio.com,senha123,Cliente
-Maria Oliveira,maria.oliveira@dominio.com,senha456,Admin
-Carlos Souza,carlos.souza@dominio.com,senha789,Admin
-Ana Costa,ana@gmail.com,senha321,Cliente
-Roberto Pereira,roberto.pereira@dominio.com,senha654,Cliente
+João Silva,joao.silva@cliente.com,senha123,Cliente
+Maria Oliveira,maria.oliveira@admin.com,senha456,Admin
+Carlos Souza,carlos.souza@admin.com,senha789,Admin
+Ana Costa,ana.costa@cliente.com,senha321,Cliente
+Roberto Pereira,roberto.pereira@cliente.com,senha654,Cliente
+Beatriz Lima,beatriz.lima@cliente.com,senha987,Cliente
+Lucas Almeida,lucas.almeida@admin.com,senha543,Admin
+Fernanda Santos,fernanda.santos@cliente.com,senha111,Cliente
+Gabriel Martins,gabriel.martins@cliente.com,senha222,Cliente
+Isabela Rocha,isabela.rocha@admin.com,senha333,Admin
