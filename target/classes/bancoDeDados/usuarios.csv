@@ -1,0 +1,6 @@
+nome,email,senha,tipoUsuario
+João Silva,joao.silva@dominio.com,senha123,Cliente
+Maria Oliveira,maria.oliveira@dominio.com,senha456,Admin
+Carlos Souza,carlos.souza@dominio.com,senha789,Admin
+Ana Costa,ana@gmail.com,senha321,Cliente
+Roberto Pereira,roberto.pereira@dominio.com,senha654,Cliente
